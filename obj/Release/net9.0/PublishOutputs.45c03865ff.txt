@@ -1,0 +1,14 @@
+/Users/user/Desktop/Startup/publish/Startup
+/Users/user/Desktop/Startup/publish/appsettings.Development.json
+/Users/user/Desktop/Startup/publish/appsettings.json
+/Users/user/Desktop/Startup/publish/Startup.dll
+/Users/user/Desktop/Startup/publish/Startup.deps.json
+/Users/user/Desktop/Startup/publish/Startup.runtimeconfig.json
+/Users/user/Desktop/Startup/publish/Startup.pdb
+/Users/user/Desktop/Startup/publish/Azure.AI.OpenAI.dll
+/Users/user/Desktop/Startup/publish/Azure.Core.dll
+/Users/user/Desktop/Startup/publish/LangChain.NET.dll
+/Users/user/Desktop/Startup/publish/Microsoft.Bcl.AsyncInterfaces.dll
+/Users/user/Desktop/Startup/publish/Microsoft.DeepDev.TokenizerLib.dll
+/Users/user/Desktop/Startup/publish/Newtonsoft.Json.dll
+/Users/user/Desktop/Startup/publish/System.Memory.Data.dll

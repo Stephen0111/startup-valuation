@@ -1,0 +1,272 @@
+﻿@{
+    ViewData["Title"] = "AI-Powered Startup Valuation";
+    Layout = "_Layout";
+}
+
+<div class="container py-5" style="max-width: 900px;">
+
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <div class="heading-badge mx-auto mb-3">
+            <i class="fas fa-chart-line fa-2x text-white"></i>
+        </div>
+        <h1 class="display-5 fw-bold text-dark mb-2">AI-Powered Startup Valuation</h1>
+        <p class="text-muted">Get intelligent valuations powered by AI analysis</p>
+    </div>
+
+    <!-- Error Alert -->
+    <div id="error-alert-container"></div>
+
+    <!-- Main Form Card -->
+    <div class="bg-white main-card p-4 p-md-5 mb-5">
+        <form id="valuationForm" novalidate>
+            <!-- Company Profile Section -->
+            <h2 class="h5 fw-bold mb-4 text-primary d-flex align-items-center gap-2">
+                <div class="icon-badge bg-primary bg-opacity-10 text-primary"><i class="fas fa-building"></i></div>
+                Company Profile
+            </h2>
+            <div class="row g-4 mb-5">
+                <div class="col-md-6">
+                    <label for="companyName" class="form-label fw-medium">Company Name <span
+                            class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="companyName" name="companyName" required
+                        placeholder="e.g., Quantum Leap Labs">
+                    <div class="invalid-feedback">Company name is required.</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="industry" class="form-label fw-medium">Industry</label>
+                    <input type="text" class="form-control" id="industry" name="industry"
+                        placeholder="e.g., Fintech, HealthTech, SaaS">
+                </div>
+                <div class="col-md-6">
+                    <label for="stage" class="form-label fw-medium">Current Funding Stage <span
+                            class="text-danger">*</span></label>
+                    <select class="form-select" id="stage" name="stage" required>
+                        <option value="pre-seed">Pre-Seed (Idea/MVP)</option>
+                        <option value="seed" selected>Seed (Early Traction)</option>
+                        <option value="series-a">Series A (Scaling)</option>
+                        <option value="series-b">Series B or Later (Growth)</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="foundingYear" class="form-label fw-medium">Founding Year</label>
+                    <input type="number" class="form-control" id="foundingYear" name="foundingYear"
+                        placeholder="e.g., 2021" min="1990" max="@DateTime.Now.Year">
+                </div>
+            </div>
+
+            <!-- Financial Metrics Section -->
+            <h2 class="h5 fw-bold mb-4 text-indigo d-flex align-items-center gap-2">
+                <div class="icon-badge bg-indigo bg-opacity-10 text-indigo"><i class="fas fa-dollar-sign"></i></div>
+                Financial Metrics
+            </h2>
+            <div class="row g-4 mb-5">
+                <div class="col-md-6">
+                    <label for="monthlyRevenue" class="form-label fw-medium">Monthly Recurring Revenue (MRR) ($)</label>
+                    <input type="number" class="form-control" id="monthlyRevenue" name="monthlyRevenue"
+                        placeholder="e.g., 50000" min="0">
+                </div>
+                <div class="col-md-6">
+                    <label for="revenueGrowthRate" class="form-label fw-medium">Monthly Revenue Growth Rate (%)</label>
+                    <input type="number" class="form-control" id="revenueGrowthRate" name="revenueGrowthRate"
+                        placeholder="e.g., 10" min="0" max="100">
+                </div>
+                <div class="col-md-6">
+                    <label for="monthlyExpenses" class="form-label fw-medium">Total Monthly Expenses ($)</label>
+                    <input type="number" class="form-control" id="monthlyExpenses" name="monthlyExpenses"
+                        placeholder="e.g., 40000" min="0">
+                </div>
+                <div class="col-md-6">
+                    <label for="fundingRaised" class="form-label fw-medium">Total Funding Raised to Date ($)</label>
+                    <input type="number" class="form-control" id="fundingRaised" name="fundingRaised"
+                        placeholder="e.g., 1000000" min="0">
+                </div>
+                <div class="col-md-6">
+                    <label for="burnRate" class="form-label fw-medium">Net Monthly Burn Rate ($)</label>
+                    <input type="number" class="form-control" id="burnRate" name="burnRate" placeholder="e.g., 10000"
+                        min="0">
+                </div>
+                <div class="col-md-6">
+                    <label for="monthsToBreakeven" class="form-label fw-medium">Months to Breakeven (Estimate)</label>
+                    <input type="number" class="form-control" id="monthsToBreakeven" name="monthsToBreakeven"
+                        placeholder="e.g., 18" min="0">
+                </div>
+            </div>
+
+            <!-- Market & Team Section -->
+            <h2 class="h5 fw-bold mb-4 text-success d-flex align-items-center gap-2">
+                <div class="icon-badge bg-success bg-opacity-10 text-success"><i class="fas fa-users"></i></div>
+                Market and Team
+            </h2>
+            <div class="row g-4 mb-5">
+                <div class="col-md-6">
+                    <label for="customersCount" class="form-label fw-medium">Active Customers Count</label>
+                    <input type="number" class="form-control" id="customersCount" name="customersCount"
+                        placeholder="e.g., 500" min="0">
+                </div>
+                <div class="col-md-6">
+                    <label for="teamSize" class="form-label fw-medium">Full-Time Team Size</label>
+                    <input type="number" class="form-control" id="teamSize" name="teamSize" placeholder="e.g., 8"
+                        min="1">
+                </div>
+                <div class="col-12">
+                    <label for="marketSize" class="form-label fw-medium">Total Addressable Market (TAM)
+                        Description</label>
+                    <input type="text" class="form-control" id="marketSize" name="marketSize"
+                        placeholder="e.g., Global B2B SaaS market for small businesses, $50B annually.">
+                </div>
+            </div>
+
+            <!-- Additional Factors Section -->
+            <h2 class="h5 fw-bold mb-4 text-orange d-flex align-items-center gap-2" style="color: #f97316;">
+                <div class="icon-badge bg-orange bg-opacity-10" style="background-color: #ffedd5; color: #f97316;"><i
+                        class="fas fa-gavel"></i></div>
+                Market & IP Factors
+            </h2>
+            <div class="row g-4 mb-5">
+                <div class="col-md-6">
+                    <label for="intellectualProperty" class="form-label fw-medium">Intellectual Property Status</label>
+                    <select class="form-select" id="intellectualProperty" name="intellectualProperty">
+                        <option value="none" selected>None/Trade Secrets</option>
+                        <option value="pending">Patent Pending</option>
+                        <option value="granted">Patent Granted/Registered Trademark</option>
+                        <option value="unique-tech">Unique Proprietary Technology</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="competitorValuation" class="form-label fw-medium">Closest Competitor's Last Valuation
+                        ($)</label>
+                    <input type="number" class="form-control" id="competitorValuation" name="competitorValuation"
+                        placeholder="e.g., 15000000" min="0">
+                </div>
+                <div class="col-md-6">
+                    <label for="customerAcquisitionCost" class="form-label fw-medium">Customer Acquisition Cost (CAC)
+                        ($)</label>
+                    <input type="number" class="form-control" id="customerAcquisitionCost"
+                        name="customerAcquisitionCost" placeholder="e.g., 200" min="0">
+                </div>
+                <div class="col-md-6">
+                    <label for="lifetimeValue" class="form-label fw-medium">Customer Lifetime Value (LTV) ($)</label>
+                    <input type="number" class="form-control" id="lifetimeValue" name="lifetimeValue"
+                        placeholder="e.g., 1500" min="0">
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid">
+                <button type="submit" class="btn btn-gradient" id="calculateBtn">
+                    <span id="spinner" class="spinner-border spinner-border-sm me-2 d-none" role="status"
+                        aria-hidden="true"></span>
+                    <span id="buttonText">Calculate Valuation</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Valuation Results -->
+    <div id="valuationResultsContainer" class="d-none"></div>
+</div>
+
+@section Scripts {
+    <!-- Font Awesome and Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        console.log("Valuation form script loaded");
+
+        const formEl = document.getElementById('valuationForm');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const buttonTextEl = document.getElementById('buttonText');
+        const spinnerEl = document.getElementById('spinner');
+        const errorContainer = document.getElementById('error-alert-container');
+        const resultsContainer = document.getElementById('valuationResultsContainer');
+
+        // Initialize formData
+        let formData = {};
+        for (const el of formEl.elements) {
+            if (el.name) formData[el.name] = el.value || null;
+        }
+
+        // Handle input changes
+        formEl.addEventListener('input', (e) => {
+            const { name, value, type } = e.target;
+            if (!name) return;
+
+            // Convert number fields to numeric values
+            formData[name] = (type === 'number') ? (value === '' ? null : parseFloat(value)) : value;
+
+            // Clear previous results and errors on new input
+            resultsContainer.classList.add('d-none');
+            errorContainer.innerHTML = '';
+        });
+
+        // Utility to toggle button spinner
+        function setLoading(loading) {
+            calculateBtn.disabled = loading;
+            if (loading) {
+                spinnerEl.classList.remove('d-none');
+                buttonTextEl.textContent = 'Analyzing with AI...';
+            } else {
+                spinnerEl.classList.add('d-none');
+                buttonTextEl.textContent = 'Calculate Valuation';
+            }
+        }
+
+        // Handle form submission
+        formEl.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!formEl.checkValidity()) {
+                formEl.classList.add('was-validated');
+                return;
+            }
+
+            setLoading(true);
+            errorContainer.innerHTML = '';
+            resultsContainer.classList.add('d-none');
+            const cleanedData = { ...formData };
+            for (const key in cleanedData) {
+                if (cleanedData[key] === '') cleanedData[key] = null;
+            }
+
+            try {
+                const res = await fetch('/api/valuation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!res.ok) {
+                    const err = await res.json();
+                    throw new Error(err.error || "Server Error");
+                }
+
+                const data = await res.json();
+
+                // --- FIX APPLIED HERE: Using data.valuation and data.analysis ---
+                const valuation = data.valuation;
+                const analysis = data.analysis;
+
+                if (valuation === undefined || analysis === undefined) {
+                    throw new Error("Missing 'valuation' or 'analysis' fields in API response.");
+                }
+
+                // Display valuation results
+                resultsContainer.classList.remove('d-none');
+                resultsContainer.innerHTML = `
+                            <div class="bg-white main-card p-4 p-md-5 mb-4">
+                                <h2 class="h3 fw-bold text-dark mb-4 text-center">Valuation Results</h2>
+                                <p><strong>Valuation:</strong> $${Number(valuation).toLocaleString()}</p>
+                                <p><strong>Analysis:</strong> ${analysis}</p>
+                            </div>
+                        `;
+
+            } catch (err) {
+                errorContainer.innerHTML = `<div class="alert alert-danger">${err.message}</div>`;
+            } finally {
+                setLoading(false);
+            }
+        });
+    </script>
+}
